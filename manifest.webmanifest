@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probatorik-Checkliste DGVT Dresden</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#1a73b8">
+    <link rel="icon" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Probatorik">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #333;
+            line-height: 1.45;
+        }
+
+        /* ===== A4-DRUCK ===== */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+            body { background: white !important; }
+            .page {
+                width: 210mm;
+                min-height: 297mm;
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            .page:last-child { page-break-after: auto; }
+            .section, .critical-box, .info-box, .tip-box, .checklist-item, table, .two-col {
+                page-break-inside: avoid;
+            }
+            a { color: #000; text-decoration: none; }
+        }
+
+        /* ===== BILDSCHIRM ===== */
+        @media screen {
+            body { background: #e8e8e8; padding: 12px 0; }
+            .page {
+                width: 210mm;
+                max-width: 100%;
+                min-height: 297mm;
+                margin: 0 auto 16px auto;
+                box-shadow: 0 1px 8px rgba(0,0,0,0.18);
+            }
+        }
+
+        .page {
+            background: white;
+            padding: 13mm 14mm 9mm 14mm;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            border-bottom: 3px solid #1a73b8;
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+        }
+        .header h1 { font-size: 19px; color: #1a73b8; margin-bottom: 3px; }
+        .header p  { font-size: 10px; color: #666; }
+
+        /* ===== INHALT ===== */
+        .content { flex: 1; }
+
+        .phase-title {
+            background: #1a73b8;
+            color: white;
+            padding: 7px 11px;
+            font-size: 13px;
+            font-weight: bold;
+            margin: 14px 0 10px 0;
+            border-radius: 4px;
+        }
+        .phase-title:first-child { margin-top: 0; }
+
+        .section-title {
+            background: #e8f0f7;
+            color: #1a73b8;
+            padding: 5px 9px;
+            font-size: 11.5px;
+            font-weight: bold;
+            margin: 11px 0 7px 0;
+            border-left: 4px solid #1a73b8;
+        }
+
+        .critical-box {
+            background: #fff3cd;
+            border-left: 4px solid #ff6b6b;
+            padding: 8px 10px;
+            margin: 9px 0;
+            border-radius: 4px;
+            font-size: 10.5px;
+            font-weight: bold;
+            color: #8b0000;
+        }
+        .critical-box::before { content: "🚨 KRITISCH: "; }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #1a73b8;
+            padding: 7px 10px;
+            margin: 9px 0;
+            border-radius: 4px;
+            font-size: 10px;
+            color: #0d47a1;
+        }
+
+        .tip-box {
+            background: #f0f7e3;
+            border-left: 4px solid #4caf50;
+            padding: 7px 10px;
+            margin: 9px 0;
+            border-radius: 4px;
+            font-size: 10px;
+            color: #2e7d32;
+        }
+        .tip-box::before { content: "💡 Tipp: "; font-weight: bold; }
+
+        /* ===== CHECKLISTE ===== */
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 6px;
+            font-size: 11px;
+        }
+        .checklist-item input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
+            margin-top: 1px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        .checklist-item label { flex: 1; cursor: pointer; }
+
+        /* ===== TABELLEN ===== */
+        table {
+            width: 100%;
+            font-size: 10px;
+            border-collapse: collapse;
+            margin: 9px 0;
+        }
+        th {
+            background: #1a73b8;
+            color: white;
+            padding: 5px 6px;
+            text-align: left;
+            font-weight: bold;
+        }
+        td {
+            padding: 4px 6px;
+            border-bottom: 1px solid #ddd;
+            vertical-align: top;
+        }
+        tr:nth-child(even) { background: #f9f9f9; }
+
+        /* ===== ZWEISPALTIG ===== */
+        .two-col { display: flex; gap: 12px; margin: 9px 0; }
+        .col {
+            flex: 1;
+            padding: 9px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .col-title {
+            font-weight: bold;
+            font-size: 11px;
+            color: #1a73b8;
+            margin-bottom: 5px;
+        }
+        .col .checklist-item { margin-bottom: 4px; font-size: 10px; }
+
+        .highlight {
+            background: #ffeb3b;
+            padding: 1px 4px;
+            border-radius: 2px;
+            font-weight: bold;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            margin-top: auto;
+            border-top: 1px solid #ddd;
+            padding-top: 7px;
+            font-size: 8.5px;
+            color: #999;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        p { font-size: 11px; margin: 5px 0; }
+    </style>
+</head>
+<body>
+
+<!-- ============ SEITE 1 ============ -->
+<div class="page" id="page-1">
+    <div class="header">
+        <h1>🎯 PROBATORIK-CHECKLISTE</h1>
+        <p>DGVT Dresden Ambulanzhandbuch (Stand September 2024) — Für JEDE Probatorik durcharbeiten!</p>
+    </div>
+    <div class="content">
+        <div class="critical-box">Alle Checkpoints müssen vollständig abgehakt sein. Fehlende Dokumentation = Keine Anrechnung auf 600h und keine Abrechnung!</div>
+
+        <div class="phase-title">PHASE 0: VOR DEM ERSTKONTAKT (Koordination)</div>
+
+        <div class="section-title">Schritt 1: Patient-Zuweisung organisieren</div>
+        <div class="checklist-item"><input type="checkbox" id="p0s1a"><label for="p0s1a"><strong>2-4 Wochen vorher</strong> anmelden: E-Mail an mail@dgvt-dresden.de (Anzahl Patienten + verfügbare Tage/Uhrzeiten)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p0s1b"><label for="p0s1b">Sekretariat bestellt Patient zur PthS ein</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p0s1c"><label for="p0s1c">E-Mail erhalten: "Neue Patient*in für Sie" mit Kontaktdaten</label></div>
+
+        <div class="section-title">Schritt 2: Patient kontaktieren (FRIST!)</div>
+        <div class="checklist-item"><input type="checkbox" id="p0s2a"><label for="p0s2a"><span class="highlight">INNERHALB 2 WERKTAGE</span> Patient anrufen + Erstkontakt-Termin vereinbaren</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p0s2b"><label for="p0s2b"><span class="highlight">Rückmeldung ans Sekretariat</span> (mail@dgvt-dresden.de): Termin vereinbart ODER "noch nicht erreicht"</label></div>
+
+        <div class="section-title">Schritt 3: Vorbereitung Erstkontakt</div>
+        <div class="checklist-item"><input type="checkbox" id="p0s3a"><label for="p0s3a">Laptop vorbereitet + Internet-Verbindung getestet</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p0s3b"><label for="p0s3b">Alle Formulare bereitstellen (Downloads aus Elefant/Cloud)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p0s3c"><label for="p0s3c">Raum buchen (Institutsambulanz oder Lehrpraxis)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p0s3d"><label for="p0s3d">Videokamera testen (falls Videos geplant)</label></div>
+
+        <div class="tip-box">Die Einhaltung der 2-Werktage-Frist ist wichtig für die Sorgfaltspflicht des Instituts gegenüber Patienten!</div>
+
+        <div class="phase-title">PHASE 1: ERSTKONTAKT (1. Sitzung) — THE CRITICAL ONE</div>
+
+        <div class="critical-box">Ohne Chipkarte-Einlesung: 0€ Vergütung + 0h Anrechnung auf 600h!</div>
+
+        <div class="section-title">Schritt A: CHIPKARTE einlesen ⭐</div>
+        <div class="checklist-item"><input type="checkbox" id="p1a1"><label for="p1a1"><strong>Patient auffordern, Chipkarte mitzubringen!</strong> (Beim Anruf / Bestellkarte)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1a2"><label for="p1a2">Chipkarte mit Lesegerät einlesen (Institutsambulanz: Küche 1. OG / Lehrpraxis: gemeinsam / KJP UKD: vorhanden)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1a3"><label for="p1a3">Chipkarte ist für <strong>aktuelles Quartal</strong> gültig (Grenzen: Jan/Apr/Jul/Okt)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1a4"><label for="p1a4">Falls fehlend: <span class="highlight">Vermerk in Krankenblatt</span> → Nächster Termin: Erneut einlesen!</label></div>
+
+        <div class="info-box"><strong>Quartalsgrenzen:</strong> Januar | April | Juli | Oktober — Zu jedem Quartalswechsel neu einlesen, auch wenn Patient läuft!</div>
+    </div>
+    <div class="footer"><span>Probatorik-Checkliste DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 1</span></div>
+</div>
+
+<!-- ============ SEITE 2 ============ -->
+<div class="page" id="page-2">
+    <div class="header">
+        <h1>PROBATORIK-CHECKLISTE (Fortsetzung)</h1>
+        <p>PHASE 1: Erstkontakt — Elefant, Aufklärung & Formulare</p>
+    </div>
+    <div class="content">
+        <div class="section-title">Schritt B: Patient in Elefant anlegen</div>
+        <div class="checklist-item"><input type="checkbox" id="p1b1"><label for="p1b1"><strong>Direkt beim Erstkontakt</strong> Patient in Elefant registrieren</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1b2"><label for="p1b2">Krankenblatt komplett ausfüllen: Name, Geburtsdatum, Adresse, Telefon</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1b3"><label for="p1b3">Versichertenstatus eintragen: <span class="highlight">NUR gesetzlich versichert</span> (keine privat, keine Beihilfe!)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1b4"><label for="p1b4">Supervisor*in Name eintragen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1b5"><label for="p1b5">Therapieort eintragen (Institutsambulanz ODER Lehrpraxis-Name)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1b6"><label for="p1b6"><strong>VERDACHTSDIAGNOSE eintragen</strong> (F-Code ICD-10, mit V=Verdacht) — <span class="highlight">OHNE DIAGNOSE = KEINE ABRECHNUNG!</span></label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1b7"><label for="p1b7">KJP: Besonderheiten dokumentieren (z.B. "gemeinsames Sorgerecht: beide Eltern")</label></div>
+
+        <div class="section-title">Schritt C: Mündliche Aufklärung (dokumentieren im Sitzungsprotokoll!)</div>
+        <div class="checklist-item"><input type="checkbox" id="p1c1"><label for="p1c1">Sie sind in Ausbildung (nicht approbiert); bei Lehrpraxis: Sie sind NICHT Mitarbeiter der Praxis, nutzen nur Räume</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1c3"><label for="p1c3">Supervision findet statt (regelmäßige Fallbesprechung mit Supervisor)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1c4"><label for="p1c4">Wahlmöglichkeit Verfahren: Tiefenpsychologie ODER Verhaltenstherapie</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1c5"><label for="p1c5"><strong>Risiken & Nutzen Psychotherapie</strong> (z.B. mögliche Symptomverschärfung zu Beginn)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1c6"><label for="p1c6">Wir sind KEINE Notfallambulanz (spontane Besuche nicht möglich) → Was tun im Notfall?</label></div>
+
+        <div class="section-title">Schritt D: Schriftliche Aufklärung — Formulare austeilen & unterschreiben lassen</div>
+        <table>
+            <tr><th style="width: 36%;">Formular</th><th style="width: 31%;">Handlung</th><th style="width: 33%;">Ablage in Elefant</th></tr>
+            <tr><td>Datenschutzerklärung</td><td>✓ Austeilen, unterschreiben lassen</td><td>Rechtliche Dokumente</td></tr>
+            <tr><td>PTV10</td><td>✓ Falls nicht über PthS erhalten</td><td>Antragsunterlagen</td></tr>
+            <tr><td>Behandlungsvertrag</td><td>✓ Unterschreiben lassen</td><td>Rechtliche Dokumente</td></tr>
+            <tr><td>Einverständnis Kommunikation</td><td>✓ Unterschreiben lassen</td><td>Rechtliche Dokumente</td></tr>
+            <tr><td>Schweigepflichtentbindung (SPE)</td><td>✓ Für Dritte-Kontakte (KJP: fast immer!)</td><td>Rechtliche Dokumente</td></tr>
+            <tr><td>Videoaufnahme-Einverständnis</td><td>✓ Erklären, keine Therapiebedingung</td><td>Rechtliche Dokumente</td></tr>
+            <tr><td>Ausfallhonorar-Aufklärung</td><td>✓ Unterschreiben lassen</td><td>Rechtliche Dokumente</td></tr>
+        </table>
+
+        <div class="info-box"><strong>KJP-SPEZIFISCH:</strong> Sorgerechtserklärung — bei gemeinsamem Sorgerecht müssen <strong>BEIDE Eltern</strong> unterschreiben! Probatorik-Sitzungen können ausnahmsweise mit nur 1 Elternteil stattfinden, vor Therapie aber schriftliche Zustimmung BEIDER erforderlich.</div>
+
+        <div class="section-title">Schritt E: Bestellkarte & Terminplanung</div>
+        <div class="checklist-item"><input type="checkbox" id="p1d1"><label for="p1d1"><strong>Bestellkarte mitgeben</strong> mit Name + Kontaktdaten</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1d2"><label for="p1d2">Mehrere Termine im Voraus planen (z.B. 5-6 Termine für die Probatorik)</label></div>
+    </div>
+    <div class="footer"><span>Probatorik-Checkliste DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 2</span></div>
+</div>
+
+<!-- ============ SEITE 3 ============ -->
+<div class="page" id="page-3">
+    <div class="header">
+        <h1>PROBATORIK-CHECKLISTE (Fortsetzung)</h1>
+        <p>PHASE 1: Erstkontakt — Diagnostik & Dokumentation</p>
+    </div>
+    <div class="content">
+        <div class="section-title">Schritt F: Diagnostik & klinischer Befund erheben</div>
+        <div class="checklist-item"><input type="checkbox" id="p1e1"><label for="p1e1"><strong>Anamneseerhebung:</strong> Was bringt Patient her? Zeitlicher Verlauf? Auswirkungen (Schule/Beruf/Soziales)?</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1e2"><label for="p1e2">Bisherige Behandlungen? Medikamente? Familiengeschichte? Substanzkonsum?</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1e3"><label for="p1e3"><strong>Psychischer Befund:</strong> Erscheinungsbild, Affekt, Psychomotorik, kognitives Funktionieren, Krankheitseinsicht</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1e4"><label for="p1e4"><strong>⚠️ SUIZIDALITÄT explorieren</strong> (Initial-Screening!)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1e5"><label for="p1e5"><strong>KJP: Kindeswohlgefährdung gescreent?</strong> (Vernachlässigung, Misshandlung)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1e6"><label for="p1e6">Mehrere Diagnose-Hypothesen entwickelt (nicht nur eine!)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1e7"><label for="p1e7"><strong>Testverfahren aussuchen</strong> für Prä-Messung (z.B. PHQ-9, DASS, SCARED aus PsychoEQ)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1e8"><label for="p1e8">Tests heute schon durchführen (optional, aber optimal)</label></div>
+
+        <div class="info-box"><strong>Messzeitpunkte:</strong> KZT: Prä + Post | LZT: Prä + Verlauf (ca. alle 12h) + Post + Katamnese (6 Monate später)</div>
+
+        <div class="section-title">Schritt G: Indikation & Therapieplanung</div>
+        <div class="checklist-item"><input type="checkbox" id="p1f1"><label for="p1f1">Ist <strong>Verhaltenstherapie indiziert</strong>? (nicht z.B. stationäre Behandlung oder Medikation?)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1f2"><label for="p1f2">Therapiemotivation vorhanden? (Patient + Sorgeberechtigte KJP)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1f3"><label for="p1f3">Kann ich tragfähige Arbeitsbeziehung mit diesem Patient aufbauen?</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1f4"><label for="p1f4">Grobe Therapieziele mit Patient besprechen (werden später detailliert)</label></div>
+
+        <div class="section-title">Schritt H: Dokumentation (SOFORT nach Sitzung!)</div>
+        <div class="checklist-item"><input type="checkbox" id="p1g1"><label for="p1g1"><span class="highlight">Sitzungsprotokoll in Elefant</span> (unter Doku): Datum, Uhrzeit, Anwesende, Anamneseinhalt, Befund, Verdachtsdiagnose, durchgeführte Aufklärungen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1g2"><label for="p1g2"><span class="highlight">Krankenblatt ausfüllen:</span> Patienteninfos, Verdachtsdiagnose (V), Supervisor, Therapieort, Besonderheiten</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1g3"><label for="p1g3">Alle <strong>unterschriebenen Formulare einscannen</strong> + in Elefant mit korrekten Filtern ablegen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1g4"><label for="p1g4">Testfragebögen in <strong>PsychoEQ eingeben</strong> (Prä-Messung) + auswerten</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1g5"><label for="p1g5">Test-PDFs in Elefant unter Diagnostik ablegen</label></div>
+
+        <div class="section-title">Schritt I: Administratives (Lehrpraxis-spezifisch)</div>
+        <div class="checklist-item"><input type="checkbox" id="p1h4"><label for="p1h4">Falls Lehrpraxis: E-Mail an mail@dgvt-dresden.de mit a) Patient-Chiffre und b) Therapieort — wichtig für Raummiete-Abrechnung!</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p1h5"><label for="p1h5">Chipkarten-Lesegerät-Klärung: Mit wem teile ich mir das Gerät?</label></div>
+
+        <div class="critical-box">Ohne E-Mail zur Lehrpraxis-Meldung: Raummiete-Abrechnung nicht korrekt!</div>
+    </div>
+    <div class="footer"><span>Probatorik-Checkliste DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 3</span></div>
+</div>
+
+<!-- ============ SEITE 4 ============ -->
+<div class="page" id="page-4">
+    <div class="header">
+        <h1>PROBATORIK-CHECKLISTE (Fortsetzung)</h1>
+        <p>PHASE 2: Probatorische Sitzungen 2-6 (KJP) / 2-4 (PP)</p>
+    </div>
+    <div class="content">
+        <div class="phase-title">PHASE 2: PROBATORISCHE SITZUNGEN</div>
+
+        <div class="info-box"><strong>Anzahl:</strong> KJP: min. 2, max. 6 Sitzungen | PP: max. 4 Sitzungen | Dauer: 50 Min pro Sitzung</div>
+
+        <div class="section-title">VOR JEDER SITZUNG</div>
+        <div class="checklist-item"><input type="checkbox" id="p2pre1"><label for="p2pre1">Raum gebucht? (EINZELN eintragen, keine Serientermine!) — Deadline: Dienstag der Vorwoche!</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2pre2"><label for="p2pre2">Chipkarte nötig? (Nur Erstkontakt + Quartalswechsel Jan/Apr/Jul/Okt)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2pre3"><label for="p2pre3">Unterlagen vorbereitet? Video läuft? Internet ok?</label></div>
+
+        <div class="section-title">WÄHREND JEDER SITZUNG (Therapeutischer Content)</div>
+        <div class="checklist-item"><input type="checkbox" id="p2dur1"><label for="p2dur1"><strong>Weitere diagnostische Abklärung:</strong> Bestätigung Verdachtsdiagnose? Ausschluss Differentialdiagnosen?</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2dur2"><label for="p2dur2"><strong>Indikation klären:</strong> Passt VT? Tragfähige Arbeitsbeziehung möglich?</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2dur3"><label for="p2dur3"><strong>Therapiemotivation & Beziehungsfähigkeit:</strong> Bleibt Patient/Sorgeberechtigte motiviert?</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2dur4"><label for="p2dur4">KJP: Teile der Probatorik können mit Sorgeberechtigten allein stattfinden (z.B. Psychoedukation)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2dur5"><label for="p2dur5">Testfragebögen systematisch weiter erheben (wenn nötig mehrfach)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2dur6"><label for="p2dur6"><strong>Suizidalität & Kindeswohlgefährdung regelmäßig explorieren</strong></label></div>
+
+        <div class="section-title">VIDEOS (Vorbereitung für Supervision)</div>
+        <div class="checklist-item"><input type="checkbox" id="p2vid1"><label for="p2vid1">Ab Sitzung 1 oder spätestens Sitzung 2 filmen (Video läuft einfach mit)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2vid2"><label for="p2vid2"><strong>Optimal: Probatorische Sitzung auf Video</strong> (hilft Supervisor, Patient zu verstehen)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2vid3"><label for="p2vid3">Videos sichern (auf Laptop, später für Supervision)</label></div>
+
+        <div class="section-title">NACH JEDER SITZUNG (Dokumentation TAGAKTUELL!)</div>
+        <div class="checklist-item"><input type="checkbox" id="p2after1"><label for="p2after1"><span class="highlight">Sitzungsprotokoll in Elefant</span> (Doku-Reiter): Inhalt, Fortschritt, Indikation, Besonderheiten</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2after2"><label for="p2after2"><span class="highlight">Krankenblatt aktualisieren:</span> Alle Sitzungen dokumentiert</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2after3"><label for="p2after3">Test-Ergebnisse in PsychoEQ eintragen + PDFs in Elefant unter Diagnostik</label></div>
+
+        <div class="section-title">Nach Sitzung 1-2: KONSILIARBERICHT BEANTRAGEN</div>
+        <div class="checklist-item"><input type="checkbox" id="p2k1"><label for="p2k1">Patient aufklären: "Wir brauchen einen Konsiliarbericht von Ihrem Arzt"</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2k2"><label for="p2k2">Formular "Befundanforderung" ausfüllen (Vorlage in Elefant)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2k3"><label for="p2k3">Überweisung an Arzt: "Indikation für VT liegt vor, erbitte Ausschluss körperlicher Hinderungsgründe"</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2k4"><label for="p2k4"><strong>⚠️ KJP: NUR Hausarzt, Kinderarzt oder Kinder- und Jugendpsychiater darf unterschreiben!</strong></label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2k5"><label for="p2k5"><span class="highlight">WICHTIG: Stempel + Unterschrift auf ALLEN Durchschlägen!</span> Patient kontrollieren lassen!</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p2k6"><label for="p2k6">Original-Durchschlag für Gutachter aufheben (für LZT-Antrag nötig!)</label></div>
+
+        <div class="critical-box">Konsiliarbericht ohne Stempel/Unterschrift = Patient muss nochmal zum Arzt!</div>
+    </div>
+    <div class="footer"><span>Probatorik-Checkliste DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 4</span></div>
+</div>
+
+<!-- ============ SEITE 5 ============ -->
+<div class="page" id="page-5">
+    <div class="header">
+        <h1>PROBATORIK-CHECKLISTE (Fortsetzung)</h1>
+        <p>PHASE 3: Fallkonzeption & PHASE 4: Diagnose-Festlegung</p>
+    </div>
+    <div class="content">
+        <div class="phase-title">PHASE 3: FALLKONZEPTION (parallel zur Probatorik!)</div>
+
+        <div class="info-box"><strong>Timing:</strong> Parallel oder direkt nach Probatorik, spätestens nach Sitzung 6. Nicht erst am Ende!</div>
+
+        <div class="section-title">Fallkonzeption schreiben (max. 2 Seiten, PTV3-Gliederung)</div>
+        <div class="checklist-item"><input type="checkbox" id="p3f1"><label for="p3f1"><strong>Struktur nach PTV3-Gliederung</strong> (nur Ziffern verwenden, nicht ganze Punkte ausschreiben!)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3f2"><label for="p3f2">1. Anlass & Beschwerdebild (kurz, was bringt Patient her?)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3f3"><label for="p3f3">2. Psychosoziale Vorgeschichte (relevant für Verständnis)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3f4"><label for="p3f4">3. Aktuelle Situation (Schule/Beruf, Familie, Soziales)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3f5"><label for="p3f5">4. Psychischer Status (Befund aus Probatorik)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3f6"><label for="p3f6">5. Diagnose(n) nach ICD-10 (F-Code) + 6. Differentialdiagnosen (falls relevant)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3f8"><label for="p3f8">7. Ätiologisches Modell (KURZ! Vulnerabilität + Stressoren + Aufrechterhaltung, max. 2-3 Absätze)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3f9"><label for="p3f9">8. Therapieindikation & -ziele (konkret, SMART, messbar!)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3f10"><label for="p3f10">9. Therapeutisches Vorgehen (Psychoedukation, Exposition, Verhaltensaktivierung, etc.)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3f11"><label for="p3f11">10. Prognose (realistisch: Chancen + Schwierigkeiten)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3f12"><label for="p3f12">11. Empfohlene Therapieart (KZT1 ODER LZT? Frequenz? Dauer?)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3f13"><label for="p3f13">12. KJP: Bezugspersonen-Sitzungen (wie viele? Inhalte?)</label></div>
+
+        <div class="critical-box">MAX. 2 SEITEN! Nicht ausschweifend. Gutachter kennt PTV3-Struktur bereits!</div>
+
+        <div class="section-title">Fallkonzeption fertigstellen & unterschreiben</div>
+        <div class="checklist-item"><input type="checkbox" id="p3s1"><label for="p3s1"><strong>Mit Supervisor abstimmen</strong> (vor Außenversand!)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3s2"><label for="p3s2"><strong>Supervisor unterschreibt</strong> Fallkonzeption</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3s3"><label for="p3s3">In Elefant einscannen, unter Antragsunterlagen ablegen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3s4"><label for="p3s4"><strong>Formular "Bestätigung Fallkonzeption"</strong> ausfüllen + von Supervisor unterschreiben lassen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p3s5"><label for="p3s5">Dieses Formular MUSS vor Antrag-Versand ausgefüllt sein!</label></div>
+
+        <div class="info-box">Achtung: Krankenkassen können die Fallkonzeption jederzeit anfordern!</div>
+
+        <div class="phase-title">PHASE 4: DIAGNOSE-FESTLEGUNG (vor Therapie-Start)</div>
+        <div class="checklist-item"><input type="checkbox" id="p4d1"><label for="p4d1">Verdachtsdiagnose (V) → <strong>Gesicherte Diagnose (G)</strong> in Elefant umwandeln (Krankenblatt → Diagnose-Reiter)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p4d2"><label for="p4d2"><span class="highlight">OHNE gesicherte Diagnose: Richtlinientherapie NICHT möglich!</span></label></div>
+    </div>
+    <div class="footer"><span>Probatorik-Checkliste DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 5</span></div>
+</div>
+
+<!-- ============ SEITE 6 ============ -->
+<div class="page" id="page-6">
+    <div class="header">
+        <h1>PROBATORIK-CHECKLISTE (Fortsetzung)</h1>
+        <p>PHASE 5: Antragsverfahren (ab Sitzung 2 möglich!)</p>
+    </div>
+    <div class="content">
+        <div class="phase-title">PHASE 5: ANTRAGSVERFAHREN STARTEN</div>
+
+        <div class="critical-box">Antrag ab Sitzung 2 stellen, nicht warten bis Sitzung 6! In Antragsbearbeitungszeit (3-5 Wochen) noch Probatorik durchführen.</div>
+
+        <div class="section-title">Erforderliche Dokumente (Übersicht)</div>
+        <div class="two-col">
+            <div class="col">
+                <div class="col-title">Patient</div>
+                <div class="checklist-item"><input type="checkbox" id="p5d1"><label for="p5d1"><strong>PTV1</strong> (Antrag Patient, unterschrieben)</label></div>
+            </div>
+            <div class="col">
+                <div class="col-title">Sie (Therapeut*in)</div>
+                <div class="checklist-item"><input type="checkbox" id="p5d2"><label for="p5d2"><strong>PTV2</strong> (Angaben Therapeut)</label></div>
+                <div class="checklist-item"><input type="checkbox" id="p5d3"><label for="p5d3">Mit Supervisor besprochen + unterschrieben</label></div>
+            </div>
+        </div>
+        <div class="two-col">
+            <div class="col">
+                <div class="col-title">Arzt</div>
+                <div class="checklist-item"><input type="checkbox" id="p5d5"><label for="p5d5"><strong>Konsiliarbericht</strong> mit Stempel + Unterschrift auf allen Durchschlägen</label></div>
+                <div class="checklist-item"><input type="checkbox" id="p5d7"><label for="p5d7">Original-Durchschlag für Gutachter aufgehoben</label></div>
+            </div>
+            <div class="col">
+                <div class="col-title">Sie (Fallkonzeption)</div>
+                <div class="checklist-item"><input type="checkbox" id="p5d8"><label for="p5d8"><strong>Fallkonzeption</strong> (PTV3, unterschrieben)</label></div>
+                <div class="checklist-item"><input type="checkbox" id="p5d9"><label for="p5d9"><strong>Bestätigung Fallkonzeption</strong> (Supervisor)</label></div>
+            </div>
+        </div>
+
+        <div class="info-box"><strong>Bei LZT zusätzlich:</strong> PTV8-Umschlag (NICHT zukleben! Sekretariat prüft Korrektheit) mit Bericht an Gutachter + Konsiliarbericht + ggf. namengeschwärzten Vorbefunden (alle Namen von Patient*innen und Sorgeberechtigten schwärzen!)</div>
+
+        <div class="section-title">Schritt 1: Scannen & in Elefant mit korrekten FILTERN ablegen</div>
+        <div class="checklist-item"><input type="checkbox" id="p5b1"><label for="p5b1">PTV1 → Filter "PTV1 (Antrag durch Patient)"</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p5b2"><label for="p5b2">PTV2 → Filter "PTV2 (Angaben Therapeut)"</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p5b3"><label for="p5b3">Konsiliarbericht → Filter "Konsiliarbericht"</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p5b4"><label for="p5b4">Fallkonzeption → Filter "Fallkonzeption / Bericht an Gutachter"</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p5b5"><label for="p5b5">Bestätigung → Filter "Formular Bestätigung Fallkonzeption"</label></div>
+
+        <div class="section-title">Schritt 2: Versand über Institut</div>
+        <div class="checklist-item"><input type="checkbox" id="p5c1"><label for="p5c1"><span class="highlight">E-Mail an mail@dgvt-dresden.de:</span> Patient-Chiffre + "Bitte Versand folgender Antragsunterlagen..." + Verweis auf Speicherort in Elefant + KK-Adresse</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p5c2"><label for="p5c2">Institut fügt Bestätigung bei: "Patient wird unter Supervision im Rahmen der Ausbildung behandelt"</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p5c3"><label for="p5c3">Institut versendet alles an die Krankenkasse</label></div>
+
+        <div class="critical-box">Krankenkassen akzeptieren NUR Originalformat! Das Institut ist allein verantwortlich für den Versand.</div>
+
+        <div class="section-title">Wartezeiten & Antragspause</div>
+        <div class="checklist-item"><input type="checkbox" id="p5w1"><label for="p5w1"><strong>KZT: 3 Wochen</strong> | <strong>LZT: 5 Wochen</strong> Bearbeitungszeit (max.)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p5w2"><label for="p5w2">⚠️ <strong>IN ANTRAGSPAUSE: KEINE Therapiestunden!</strong> Patient aufklären!</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p5w3"><label for="p5w3">Alternative: Gesprächsziffer 23220 (aber KEINE Akutbehandlung in der Ausbildung!)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p5w4"><label for="p5w4">Falls noch Probatorik-Sitzungen offen: Diese KÖNNEN in der Antragspause laufen!</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p5w5"><label for="p5w5">Nach 4 Wochen keine Info? → Sekretariat kontaktieren (nie selbst KK anrufen!)</label></div>
+    </div>
+    <div class="footer"><span>Probatorik-Checkliste DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 6</span></div>
+</div>
+
+<!-- ============ SEITE 7 ============ -->
+<div class="page" id="page-7">
+    <div class="header">
+        <h1>PROBATORIK-CHECKLISTE (Fortsetzung)</h1>
+        <p>PHASE 6: Bewilligung & PHASE 7: Probatorik-Abschluss</p>
+    </div>
+    <div class="content">
+        <div class="phase-title">PHASE 6: BEWILLIGUNG ERHALTEN & DOKUMENTIEREN</div>
+
+        <div class="critical-box">OHNE Bewilligungsdatum in Elefant: KEINE ABRECHNUNG, KEINE VERGÜTUNG — auch wenn bewilligt wurde!</div>
+
+        <div class="section-title">Wenn die Krankenkasse bewilligt:</div>
+        <div class="checklist-item"><input type="checkbox" id="p6a1"><label for="p6a1">Bewilligungsschreiben liegt vor (Patient erhält Post, oft auch Institut)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p6a2"><label for="p6a2"><span class="highlight">KRITISCH: Bewilligungsdatum + Stundenkontingent in Elefant eintragen!</span> (Schein-Verwaltung)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p6a4"><label for="p6a4">Bewilligungsschreiben einscannen + in Elefant: Antragsunterlagen → "Bewilligungen der Krankenkasse"</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p6a5"><label for="p6a5"><span class="highlight">ERST NACH BEWILLIGUNG darf Therapie starten!</span> (nicht mit Gutachter-Stellungnahme allein!)</label></div>
+
+        <div class="section-title">Wenn die Krankenkasse ablehnt:</div>
+        <div class="checklist-item"><input type="checkbox" id="p6b1"><label for="p6b1">KK muss Sie + Patient informieren + Ansprechpartner nennen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p6b2"><label for="p6b2">Mit Supervisor besprechen: Widerspruch sinnvoll? Neuer Antrag mit Modifikationen?</label></div>
+
+        <div class="phase-title">PHASE 7: PROBATORIK-ABSCHLUSS & ÜBERGANG ZUR THERAPIE</div>
+
+        <div class="section-title">Checkliste Abschluss Probatorik (Voraussetzung für Therapie-Start)</div>
+        <div class="checklist-item"><input type="checkbox" id="p7e1"><label for="p7e1">Alle 6 (KJP) / 4 (PP) Sitzungen durchgeführt + dokumentiert</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p7e2"><label for="p7e2">Diagnose gesichert: V → G in Elefant umgewandelt</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p7e3"><label for="p7e3">Testdiagnostik komplett: Mind. eine Prä-Messung durchgeführt + in PsychoEQ eingegeben</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p7e4"><label for="p7e4">Alle rechtlichen Dokumente in Elefant: Unterschriebene Versionen!</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p7e5"><label for="p7e5">Fallkonzeption geschrieben + von Supervisor unterschrieben</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p7e6"><label for="p7e6">Antrag zur KK versendet (oder noch in Bearbeitung)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p7e7"><label for="p7e7"><strong>Bewilligung erhalten + Bewilligungsdatum in Elefant eingetragen!</strong></label></div>
+        <div class="checklist-item"><input type="checkbox" id="p7e8"><label for="p7e8">Supervision zur Probatorik stattgefunden: Mind. 1-2x supervisiert, im Studienbuch dokumentiert + unterschrieben</label></div>
+
+        <div class="info-box"><strong>Übergang zu Richtlinientherapie:</strong> ERST nach Bewilligung! Therapeut*in bleibt gleich (kein Wechsel). Neuer Schwerpunkt: Nicht mehr "Indikation klären", sondern "Symptome reduzieren + Ziele erreichen".</div>
+
+        <div class="phase-title">SUPERVISION WÄHREND DER PROBATORIK</div>
+
+        <div class="section-title">Anforderungen (VERPFLICHTEND)</div>
+        <div class="checklist-item"><input type="checkbox" id="p7s1"><label for="p7s1"><strong>Frequenz:</strong> Mind. nach jeder 4. Therapiestunde</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p7s2"><label for="p7s2"><strong>Gesamtumfang PA:</strong> Mind. 150h (50h Einzelsupervision + 100h Gruppensupervision)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p7s3"><label for="p7s3"><strong>Mind. 3 verschiedene Supervisor*innen</strong> | Gruppengröße: 4-5 Personen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p7s4"><label for="p7s4">Supervisionsprotokoll pro Sitzung + Therapieverlaufsbogen → beide in Elefant + Supervisor unterschreibt</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p7s5"><label for="p7s5">Schriftverkehr über <strong>DGVT-Cloud austauschen</strong> (NICHT per E-Mail!)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="p7s6"><label for="p7s6">Im Studienbuch dokumentieren: Alle Supervisionsstunden mit Supervisor-Unterschrift</label></div>
+
+        <div class="critical-box">VIDEOS: Mind. 40 Videosichtungen in der Supervision über die 600 Behandlungsstunden, mind. 1 Video pro Patient!</div>
+    </div>
+    <div class="footer"><span>Probatorik-Checkliste DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 7</span></div>
+</div>
+
+<!-- ============ SEITE 8 ============ -->
+<div class="page" id="page-8">
+    <div class="header">
+        <h1>QUICK REFERENCE</h1>
+        <p>Häufige Fehler, Elefant-Filter, häufige Fragen</p>
+    </div>
+    <div class="content">
+        <div class="phase-title">🚨 DIE 10 HÄUFIGSTEN FEHLER IN DER PROBATORIK</div>
+        <table>
+            <tr><th style="width: 6%;">Nr.</th><th style="width: 48%;">FEHLER</th><th style="width: 46%;">FOLGE</th></tr>
+            <tr><td>1</td><td><strong>Chipkarte nicht eingelesen</strong></td><td>0€ Vergütung + 0h Anrechnung</td></tr>
+            <tr><td>2</td><td><strong>Verdachtsdiagnose nicht eingetragen</strong></td><td>Abrechnung unmöglich</td></tr>
+            <tr><td>3</td><td><strong>Bewilligungsdatum nicht in Elefant</strong></td><td>Keine Vergütung trotz Bewilligung</td></tr>
+            <tr><td>4</td><td><strong>WhatsApp-Kommunikation mit Patient</strong></td><td>Datenschutzverletzung</td></tr>
+            <tr><td>5</td><td><strong>Fallkonzeption ohne Supervisor-Unterschrift</strong></td><td>Antrag unvollständig</td></tr>
+            <tr><td>6</td><td><strong>Konsiliarbericht ohne Stempel + Unterschrift</strong></td><td>Arzt muss nochmal unterschreiben</td></tr>
+            <tr><td>7</td><td><strong>Dokumentation nicht tagaktuell</strong></td><td>Später schwer nachzuweisen</td></tr>
+            <tr><td>8</td><td><strong>Prä-Testung vergessen</strong></td><td>Keine Baseline für Therapie-Erfolg</td></tr>
+            <tr><td>9</td><td><strong>Supervision nicht dokumentiert</strong></td><td>Kein Supervisions-Nachweis</td></tr>
+            <tr><td>10</td><td><strong>Probatorik zu lange gezogen</strong></td><td>Patient wartet unnötig</td></tr>
+        </table>
+
+        <div class="phase-title">ELEFANT-FILTER ÜBERSICHT (zum Nachschlagen)</div>
+        <p style="font-size: 10px;"><strong>Rechtliche Dokumente:</strong> Datenschutzerklärung | Behandlungsvertrag | SPE | Sorgerecht | Video-Einverständnis | Kommunikations-Einverständnis | Ausfallhonorar</p>
+        <p style="font-size: 10px;"><strong>Antragsunterlagen:</strong> PTV1 | PTV2 | Konsiliarbericht | Fallkonzeption | Bestätigung Fallkonzeption | Bewilligungen der KK | PTV11 (PthS)</p>
+        <p style="font-size: 10px;"><strong>Befunde:</strong> Abschlussberichte Vorbehandler | Medizinische Befunde | Überweisungsschein</p>
+        <p style="font-size: 10px;"><strong>Berichte:</strong> Zwischen-/Abschlussberichte (eigene)</p>
+        <p style="font-size: 10px;"><strong>Diagnostik:</strong> Testdiagnostik (WAIS, WISC, etc.) | Fragebögen</p>
+        <p style="font-size: 10px;"><strong>Doku:</strong> Sitzungsprotokolle | Mitschriften | Hospitationen | Therapierelevante Zeichnungen</p>
+        <p style="font-size: 10px;"><strong>Supervision:</strong> SV-Protokolle &nbsp;|&nbsp; <strong>Sonstiges:</strong> Terminbestätigung | Allgemeiner Briefkopf</p>
+
+        <div class="phase-title">HÄUFIGE FRAGEN ZUR PROBATORIK</div>
+        <p><strong>F: Patient hatte vor 8 Monaten bei anderer PiA Probatorik. Kann ich meine abrechnen?</strong><br>
+        <span style="color: #c00000; font-weight: bold;">A: NEIN! Probatorik-Stunden (35150) dürfen nur 1x pro Jahr pro Patient abgerechnet werden — auch lehrpraxisübergreifend!</span></p>
+        <p><strong>F: Patient kommt zur ersten Sitzung ohne Chipkarte. Was jetzt?</strong><br>
+        <span style="color: #c00000; font-weight: bold;">A: Chipkarte ist PFLICHT. Vermerk in Akte + nächster Termin: Chipkarte einlesen. Ohne Chipkarte keine Abrechnung!</span></p>
+        <p><strong>F: Probatorik fertig, aber noch keine Bewilligung. Darf ich mit Therapie starten?</strong><br>
+        <span style="color: #c00000; font-weight: bold;">A: NEIN! Erst mit Bewilligung. Überbrückung mit Gesprächsziffer 23220 (KEINE Akutbehandlung!).</span></p>
+        <p><strong>F: Muss ich Videoaufnahmen machen?</strong><br>
+        <span style="color: #2e7d32; font-weight: bold;">A: JA, Pflicht! Mind. 40 Sichtungen über 600h, mind. 1 Video pro Patient beim Supervisor.</span></p>
+        <p><strong>F: Fallkonzeption — wie strukturieren?</strong><br>
+        <span style="color: #2e7d32; font-weight: bold;">A: PTV3-Gliederung, nur Ziffern. Max. 2 Seiten. Gutachter kennt die Struktur bereits.</span></p>
+        <p><strong>F: Wann kann ich den Antrag stellen?</strong><br>
+        <span style="color: #2e7d32; font-weight: bold;">A: Ab Sitzung 2! In der Wartezeit (3-5 Wochen) noch Probatorik durchführen.</span></p>
+    </div>
+    <div class="footer"><span>Probatorik-Checkliste DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 8</span></div>
+</div>
+
+<!-- ============ SEITE 9 ============ -->
+<div class="page" id="page-9">
+    <div class="header">
+        <h1>WICHTIGE KONTAKTE & NOTIZEN</h1>
+        <p>Zum Ausfüllen und Ausdrucken</p>
+    </div>
+    <div class="content">
+        <div class="section-title">Wichtige Kontakte</div>
+        <div class="tip-box" style="font-size: 10.5px;">
+            <p style="margin: 0;"><strong>Allgemeine Infos & Sekretariat:</strong> 📧 mail@dgvt-dresden.de | 📞 0351 21 24 58 0</p>
+            <p style="margin: 6px 0 0 0;"><strong>Ausbildungskoordination KJP (Susanna Stähnke):</strong> 📧 susanna.staehnke@dgvt-dresden.de | 📞 0351 – 21 24 58 44 (Mo + Do 10:30–13:30)</p>
+            <p style="margin: 6px 0 0 0;"><strong>Ausbildungskoordination PP (Paul Wersch):</strong> 📧 paul.wersch@dgvt-dresden.de | 📞 0351 – 21 24 58 51 (Di + Mi 12:30–13:30)</p>
+            <p style="margin: 6px 0 0 0;"><strong>Lehrpraxis KJP UKD (Anne Peuker):</strong> 📧 anne.peuker@ukdd.de | 📞 0351 – 458 7177</p>
+        </div>
+
+        <div class="section-title">MEINE PATIENTEN (selbst ausfüllen)</div>
+        <table>
+            <tr><th>Patient-Chiffre</th><th>Supervisor*in</th><th>Prob-Start</th><th>Status</th><th>Notizen</th></tr>
+            <tr style="height: 26px;"><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr style="height: 26px;"><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr style="height: 26px;"><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr style="height: 26px;"><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr style="height: 26px;"><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr style="height: 26px;"><td></td><td></td><td></td><td></td><td></td></tr>
+        </table>
+
+        <div class="section-title">MEINE SUPERVISION</div>
+        <p><strong>Einzelsupervision:</strong><br>Supervisor*in: ____________________________ &nbsp; Stunden geplant: _______ &nbsp; Patienten: ____________________</p>
+        <p><strong>Gruppensupervision 1:</strong><br>Supervisor*in: ____________________________ &nbsp; Stunden geplant: _______ &nbsp; Gruppengröße: _______</p>
+        <p><strong>Gruppensupervision 2:</strong><br>Supervisor*in: ____________________________ &nbsp; Stunden geplant: _______ &nbsp; Gruppengröße: _______</p>
+        <p><strong>Gruppensupervision 3:</strong><br>Supervisor*in: ____________________________ &nbsp; Stunden geplant: _______ &nbsp; Gruppengröße: _______</p>
+
+        <div class="section-title">PERSÖNLICHE NOTIZEN ZUR PROBATORIK</div>
+        <div style="border: 1px solid #ddd; padding: 12px; background: #fafafa; border-radius: 4px;">
+            <p>__________________________________________________________________________</p>
+            <p>__________________________________________________________________________</p>
+            <p>__________________________________________________________________________</p>
+            <p>__________________________________________________________________________</p>
+            <p>__________________________________________________________________________</p>
+            <p>__________________________________________________________________________</p>
+            <p>__________________________________________________________________________</p>
+        </div>
+    </div>
+    <div class="footer"><span>Probatorik-Checkliste DGVT Dresden • Handbuch Stand September 2024 • Verifikation ✓</span><span>Seite 9</span></div>
+</div>
+
+<!-- ============ SEITE 1: ONBOARDING – ZUGÄNGE & TECHNIK ============ -->
+<div class="page" id="page-10">
+    <div class="header">
+        <h1>🚀 ONBOARDING-CHECKLISTE: Start in die Praktische Ausbildung</h1>
+        <p>DGVT Dresden • Handbuch September 2024 • EINMALIG vor dem ersten Patienten durcharbeiten</p>
+    </div>
+    <div class="content">
+        <div class="phase-title">TEIL 1: ZUGÄNGE & TECHNIK EINRICHTEN</div>
+
+        <div class="section-title">Systeme & Zugänge</div>
+        <div class="checklist-item"><input type="checkbox" id="ob1"><label for="ob1"><strong>Elefant-Zugang</strong> eingerichtet (elektronische Patientenakte – ALLES wird hier dokumentiert)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob2"><label for="ob2"><strong>PsychoEQ-Zugang</strong> eingerichtet (Testdiagnostik: Eingabe + Auswertung der Fragebögen)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob3"><label for="ob3"><strong>DGVT-Cloud-Zugang</strong> eingerichtet (Schriftverkehr mit Supervisor*innen läuft NUR hierüber, nicht per E-Mail!)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob4"><label for="ob4"><strong>Raumbuchungssystem</strong> getestet: http://kalender.kjp-dgvt-dresden.de</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob5"><label for="ob5">Raumbuchungs-Regel notiert: Einzeltermine eintragen (keine Serien), <span class="highlight">Deadline Dienstag der Vorwoche</span></label></div>
+
+        <div class="section-title">Instituts-Laptop</div>
+        <div class="checklist-item"><input type="checkbox" id="ob6"><label for="ob6">Laptop erhalten + <strong>Festplatten-Verschlüsselung aktiv</strong> (Pflicht!)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob7"><label for="ob7">Kostenstaffel notiert: <strong>36 Monate kostenlos</strong> | Monat 37–48: <strong>10 €/Monat</strong> | ab Monat 49: <strong>20 €/Monat</strong></label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob8"><label for="ob8">Internet-Verbindung am Behandlungsort getestet</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob9"><label for="ob9">Videokamera/Aufnahmetechnik getestet (Videosupervision ist Pflicht!)</label></div>
+
+        <div class="section-title">Diensthandy & Kommunikation</div>
+        <div class="checklist-item"><input type="checkbox" id="ob10"><label for="ob10">Diensthandy eingerichtet — Patientenkontakt NUR per <strong>SMS/Telefon</strong></label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob11"><label for="ob11">Patientendaten auf Diensthandy <strong>nur als Chiffre</strong> speichern (nie Klarnamen)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob12"><label for="ob12">E-Mail-Regel verinnerlicht: In E-Mail-Texten nur die <strong>ersten 5 Stellen der Chiffre</strong> (z.B. K0806)</label></div>
+
+        <div class="critical-box">WhatsApp und E-Mail mit Patienten sind VERBOTEN (Datenschutzverletzung!). USB-Sticks sind verboten (Handbuch 7.2.1).</div>
+
+        <div class="section-title">Chipkarten-Lesegerät & Material</div>
+        <div class="checklist-item"><input type="checkbox" id="ob13"><label for="ob13">Lesegerät-Zugang geklärt: Institutsambulanz = Küche 1. OG | Lehrpraxis = geteiltes/eigenes Gerät (Absprache!) | KJP UKD = vorhanden</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob14"><label for="ob14">Alle <strong>Formular-Vorlagen</strong> aus Elefant + Cloud heruntergeladen (Datenschutz, Behandlungsvertrag, SPE, PTV-Formulare, Befundanforderung, Ausfallhonorar, Video-Einverständnis, Bestätigung Fallkonzeption)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob15"><label for="ob15">Bestellkarten besorgt</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob16"><label for="ob16">KJP: <strong>Kinderschutzordner + Ampelbögen</strong> auf dem Laptop lokalisiert</label></div>
+    </div>
+    <div class="footer"><span>Praxisstart DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 10</span></div>
+</div>
+
+<!-- ============ SEITE 2: ONBOARDING – ORGANISATION & PLANUNG ============ -->
+<div class="page" id="page-11">
+    <div class="header">
+        <h1>ONBOARDING-CHECKLISTE (Fortsetzung)</h1>
+        <p>TEIL 2: Organisation, Supervision planen & Kontakte</p>
+    </div>
+    <div class="content">
+        <div class="section-title">Supervision von Anfang an planen</div>
+        <div class="checklist-item"><input type="checkbox" id="ob17"><label for="ob17"><strong>Mind. 3 verschiedene Supervisor*innen</strong> über die Ausbildung einplanen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob18"><label for="ob18">Gesamtumfang notiert: <strong>150h Supervision</strong> (50h Einzel + 100h Gruppe), Gruppengröße 4–5 Personen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob19"><label for="ob19">Frequenz notiert: Supervision <strong>mind. nach jeder 4. Therapiestunde</strong></label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob20"><label for="ob20">Erste*n Einzelsupervisor*in kontaktiert + Termine vereinbart</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob21"><label for="ob21">Gruppensupervisions-Gruppe gefunden/zugeteilt</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob22"><label for="ob22">Anforderung gemerkt: <strong>4 Belegfälle + 2 Prüfungsfälle</strong> + <strong>mind. 40 Videosichtungen</strong> über die 600 Behandlungsstunden</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob23"><label for="ob23"><strong>Studienbuch</strong> angelegt (alle Supervisionsstunden mit Unterschrift dokumentieren)</label></div>
+
+        <div class="info-box"><strong>Supervisor-Anforderungen laut Handbuch:</strong> 3 Jahre Lehrtätigkeit + 5 Jahre klinische Tätigkeit nach Approbation. Eigene Vorschläge qualifizierter Therapeut*innen sind möglich.</div>
+
+        <div class="section-title">Erste Patienten organisieren</div>
+        <div class="checklist-item"><input type="checkbox" id="ob24"><label for="ob24"><strong>2–4 Wochen vor gewünschtem Start</strong>: E-Mail an mail@dgvt-dresden.de mit Anzahl Patienten + verfügbaren Tagen/Uhrzeiten</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob25"><label for="ob25">Regel verinnerlicht: Nach Zuweisung Patient <span class="highlight">innerhalb 2 Werktage</span> kontaktieren + Rückmeldung ans Sekretariat</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob26"><label for="ob26">Merken: <strong>Nur GKV-Patienten</strong> (keine Privatversicherten, keine Beihilfe)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob27"><label for="ob27">Merken: Auf die 600h zählen <strong>nur Probatorik- + Therapiestunden</strong> (PthS zählt NICHT)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob28"><label for="ob28">Falls Lehrpraxis/KJP UKD: Standort geklärt (UKD: Blasewitzer Str. 86 / Chemnitzer Str. 50, Haus 105)</label></div>
+
+        <div class="section-title">Wichtige Kontakte (einspeichern!)</div>
+        <div class="tip-box">
+            <p style="margin: 0;"><strong>Sekretariat / Allgemein:</strong> mail@dgvt-dresden.de | 0351 21 24 58 0 | Regerstraße 11, 01309 Dresden</p>
+            <p style="margin: 6px 0 0 0;"><strong>Ausbildungskoordination KJP (Susanna Stähnke):</strong> susanna.staehnke@dgvt-dresden.de | 0351 – 21 24 58 44 (Mo + Do 10:30–13:30)</p>
+            <p style="margin: 6px 0 0 0;"><strong>Ausbildungskoordination PP (Paul Wersch):</strong> paul.wersch@dgvt-dresden.de | 0351 – 21 24 58 51 (Di + Mi 12:30–13:30)</p>
+            <p style="margin: 6px 0 0 0;"><strong>Lehrpraxis KJP UKD (Anne Peuker):</strong> anne.peuker@ukdd.de | 0351 – 458 7177</p>
+        </div>
+
+        <div class="section-title">Datenschutz-Grundregeln (dauerhaft gültig)</div>
+        <div class="checklist-item"><input type="checkbox" id="ob29"><label for="ob29">Kein WhatsApp, keine E-Mail mit Patienten | Kein USB-Stick | Laptop verschlüsselt</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob30"><label for="ob30">Papierdokumente nach dem Einscannen <strong>schreddern</strong></label></div>
+        <div class="checklist-item"><input type="checkbox" id="ob31"><label for="ob31"><strong>Akteneinsicht</strong> durch Patienten: erst nach Rücksprache mit Supervisor + Ausbildungsleitung</label></div>
+    </div>
+    <div class="footer"><span>Praxisstart DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 11</span></div>
+</div>
+
+<!-- ============ SEITE 3: QUARTALS-ROUTINE ============ -->
+<div class="page" id="page-12">
+    <div class="header">
+        <h1>📅 QUARTALS-ROUTINE</h1>
+        <p>DGVT Dresden • Handbuch September 2024 • Zu JEDEM Quartalswechsel durcharbeiten (Jan / Apr / Jul / Okt)</p>
+    </div>
+    <div class="content">
+        <div class="critical-box">Das größte finanzielle Risiko der Ausbildung steckt im Quartalsrhythmus: Ohne Chipkarte und ohne fristgerechte Eintragung = 0 € Vergütung + 0 h Anrechnung — unwiderruflich!</div>
+
+        <table>
+            <tr><th style="width: 18%;">Quartal</th><th style="width: 41%;">Zeitraum</th><th style="width: 41%;">Chipkarte neu einlesen ab</th></tr>
+            <tr><td><strong>Q1</strong></td><td>Januar – März</td><td>Januar</td></tr>
+            <tr><td><strong>Q2</strong></td><td>April – Juni</td><td>April</td></tr>
+            <tr><td><strong>Q3</strong></td><td>Juli – September</td><td>Juli</td></tr>
+            <tr><td><strong>Q4</strong></td><td>Oktober – Dezember</td><td>Oktober</td></tr>
+        </table>
+
+        <div class="phase-title">ZU QUARTALSBEGINN (erste Sitzung jedes Patienten im neuen Quartal)</div>
+        <div class="checklist-item"><input type="checkbox" id="q1"><label for="q1"><span class="highlight">Chipkarte ALLER laufenden Patienten neu einlesen</span> — auch wenn die Therapie längst läuft! Patienten vorab erinnern, Karte mitzubringen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="q2"><label for="q2"><strong>Neuer Abrechnungsschein pro Patient</strong> für das Quartal in Elefant</label></div>
+        <div class="checklist-item"><input type="checkbox" id="q3"><label for="q3">Karte vergessen? → Vermerk im Krankenblatt + nächster Termin: erneut einlesen</label></div>
+
+        <div class="phase-title">LAUFEND IM QUARTAL</div>
+        <div class="checklist-item"><input type="checkbox" id="q4"><label for="q4">Alle Leistungen <strong>tagaktuell</strong> in Elefant eintragen (Leistungen-Reiter, Sitzungsprotokolle, Krankenblatt)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="q5"><label for="q5">Bewilligungsdaten + Stundenkontingente aller Patienten in Elefant vollständig?</label></div>
+        <div class="checklist-item"><input type="checkbox" id="q6"><label for="q6">Bei Therapieabschluss: <span class="highlight">Kennzeichnung 88130/88131</span> + E-Mail ans Institut</label></div>
+
+        <div class="phase-title">VOR QUARTALSENDE (letzte Woche!)</div>
+        <div class="checklist-item"><input type="checkbox" id="q7"><label for="q7"><strong>Vollständigkeits-Check:</strong> Alle Sitzungen des Quartals mit Leistung in Elefant eingetragen?</label></div>
+        <div class="checklist-item"><input type="checkbox" id="q8"><label for="q8">Alle Chipkarten des Quartals eingelesen?</label></div>
+
+        <div class="critical-box">Nach Quartalsende sind KEINE Eintragungen mehr möglich! Vergessene Leistungen sind endgültig verloren.</div>
+
+        <div class="phase-title">NACH DEM QUARTAL</div>
+        <div class="checklist-item"><input type="checkbox" id="q9"><label for="q9"><strong>Rückvergütung prüfen:</strong> 42% der von der Krankenkasse vergüteten Leistungen, Auszahlung zum Ende des Folgequartals</label></div>
+        <div class="checklist-item"><input type="checkbox" id="q10"><label for="q10">Stundenstand aktualisieren: Wie viele der 600 Behandlungsstunden sind erreicht? (nur Probatorik + Therapie zählen, PthS nicht)</label></div>
+
+        <div class="tip-box">Quartalswechsel als wiederkehrenden Kalendereintrag anlegen (jeweils 1. Woche Januar, April, Juli, Oktober) — so geht keine Chipkarte mehr verloren.</div>
+    </div>
+    <div class="footer"><span>Praxisstart DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 12</span></div>
+</div>
+
+<!-- ============ SEITE 4: NOTFALL-BLATT ============ -->
+<div class="page" id="page-13">
+    <div class="header">
+        <h1>⚠️ NOTFALL-BLATT: Krisen & Sonderfälle</h1>
+        <p>DGVT Dresden • Handbuch September 2024 • Ausdrucken und griffbereit halten</p>
+    </div>
+    <div class="content">
+        <div class="phase-title">SUIZIDALITÄT</div>
+        <div class="checklist-item"><input type="checkbox" id="nf1"><label for="nf1">In JEDER Behandlungsphase regelmäßig explorieren (ab Erstkontakt, Initial-Screening)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="nf2"><label for="nf2">Bei Anzeichen: <strong>Antisuizid-Pakt + Sicherheitsplan</strong> mit Patient erarbeiten</label></div>
+        <div class="checklist-item"><input type="checkbox" id="nf3"><label for="nf3"><strong>Supervisor*in umgehend einbeziehen</strong> + alles in Elefant dokumentieren</label></div>
+        <div class="checklist-item"><input type="checkbox" id="nf4"><label for="nf4">Patient von Beginn an aufklären: Die Ambulanz ist <strong>KEINE Notfallambulanz</strong> — Notfallweg vorab besprechen</label></div>
+
+        <div class="section-title">Zuständige Klinik für meine Region (selbst eintragen)</div>
+        <p>Klinik (Erwachsene): ___________________________________ &nbsp; Telefon: ____________________</p>
+        <p>KJP-Klinik (nach Region): ______________________________ &nbsp; Telefon: ____________________</p>
+
+        <div class="info-box"><strong>Allgemeine Notfallnummern:</strong> Notruf 112 | Ärztlicher Bereitschaftsdienst 116 117 | Telefonseelsorge 0800 1110111 / 0800 1110222 / 116 123</div>
+
+        <div class="phase-title">KINDESWOHLGEFÄHRDUNG (KJP)</div>
+        <div class="checklist-item"><input type="checkbox" id="nf5"><label for="nf5">Bei jedem Erstkontakt + laufend screenen (Vernachlässigung, Misshandlung)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="nf6"><label for="nf6">Bei Verdacht: <strong>Kinderschutzordner + Ampelbögen</strong> auf dem Laptop nutzen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="nf7"><label for="nf7">Supervisor*in + Ausbildungsleitung einbeziehen, Vorgehen dokumentieren</label></div>
+
+        <div class="phase-title">SONDERFÄLLE IM VERLAUF</div>
+
+        <div class="section-title">Patient nicht erreichbar (nach PthS / Zuweisung)</div>
+        <div class="checklist-item"><input type="checkbox" id="nf8"><label for="nf8"><strong>Brief mit Terminvorschlag + Rückmeldefrist</strong> über das Institut versenden lassen</label></div>
+
+        <div class="section-title">Therapiepause</div>
+        <div class="checklist-item"><input type="checkbox" id="nf9"><label for="nf9">Maximal <strong>6 Monate</strong> Pause möglich — länger = <strong>neue Bewilligung</strong> erforderlich</label></div>
+
+        <div class="section-title">Krankenkassenwechsel des Patienten</div>
+        <div class="checklist-item"><input type="checkbox" id="nf10"><label for="nf10"><strong>Sofort melden</strong>, neuen Schein in Elefant anlegen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="nf11"><label for="nf11"><span class="highlight">Therapie pausiert bis zur neuen Bewilligung!</span></label></div>
+
+        <div class="section-title">Patient verlangt Akteneinsicht</div>
+        <div class="checklist-item"><input type="checkbox" id="nf12"><label for="nf12">Nicht sofort herausgeben — erst <strong>Rücksprache mit Supervisor + Ausbildungsleitung</strong></label></div>
+
+        <div class="critical-box">Bei jeder Krise gilt: Supervisor*in einbeziehen, tagaktuell in Elefant dokumentieren. Akutbehandlung ist in der Ausbildung VERBOTEN — bei akuter Gefährdung über Klinik/Notruf eskalieren.</div>
+    </div>
+    <div class="footer"><span>Praxisstart DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 13</span></div>
+</div>
+
+<!-- ============ SEITE 1: LAUFENDE THERAPIE ============ -->
+<div class="page" id="page-14">
+    <div class="header">
+        <h1>🔄 LAUFENDE RICHTLINIENTHERAPIE</h1>
+        <p>DGVT Dresden • Handbuch September 2024 • Gilt ab Bewilligung, für jede Therapiestunde</p>
+    </div>
+    <div class="content">
+        <div class="critical-box">Start ERST nach Bewilligung + eingetragenem Bewilligungsdatum/Stundenkontingent in Elefant!</div>
+
+        <div class="section-title">VOR JEDER SITZUNG</div>
+        <div class="checklist-item"><input type="checkbox" id="t1"><label for="t1">Raum gebucht? (einzeln, Deadline Dienstag der Vorwoche)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="t2"><label for="t2">Quartalswechsel (Jan/Apr/Jul/Okt)? → Chipkarte neu einlesen + neuer Abrechnungsschein</label></div>
+        <div class="checklist-item"><input type="checkbox" id="t3"><label for="t3">Stundenkontingent im Blick: Wie viele bewilligte Stunden sind noch übrig?</label></div>
+        <div class="checklist-item"><input type="checkbox" id="t4"><label for="t4">Video aufnehmen? (mind. 1 Video pro Patient für Supervision, 40 Sichtungen gesamt)</label></div>
+
+        <div class="section-title">NACH JEDER SITZUNG (tagaktuell!)</div>
+        <div class="checklist-item"><input type="checkbox" id="t5"><label for="t5"><span class="highlight">Sitzungsprotokoll in Elefant</span> (Doku-Reiter)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="t6"><label for="t6"><span class="highlight">Leistung mit EBM-Ziffer eintragen</span> (Leistungen-Reiter) — ohne Eintrag keine Vergütung!</label></div>
+        <div class="checklist-item"><input type="checkbox" id="t7"><label for="t7">Krankenblatt aktualisieren</label></div>
+        <div class="checklist-item"><input type="checkbox" id="t8"><label for="t8">Suizidalität (und KJP: Kindeswohlgefährdung) weiter im Blick + dokumentieren</label></div>
+
+        <div class="section-title">SUPERVISION (laufend, verpflichtend)</div>
+        <div class="checklist-item"><input type="checkbox" id="t9"><label for="t9"><strong>Mind. nach jeder 4. Therapiestunde</strong> Supervision zum Fall</label></div>
+        <div class="checklist-item"><input type="checkbox" id="t10"><label for="t10">Supervisionsprotokoll pro Sitzung + Therapieverlaufsbogen → in Elefant + <strong>Supervisor unterschreibt</strong></label></div>
+        <div class="checklist-item"><input type="checkbox" id="t11"><label for="t11">Supervisionsstunde im <strong>Studienbuch</strong> mit Unterschrift dokumentiert</label></div>
+        <div class="checklist-item"><input type="checkbox" id="t12"><label for="t12">Schriftverkehr/Dokumente mit Supervisor nur über <strong>DGVT-Cloud</strong> (nicht E-Mail)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="t13"><label for="t13">Regelmäßig Videos in der Supervision sichten lassen</label></div>
+
+        <div class="info-box"><strong>Hinweise des Supervisors sind BINDEND</strong> — der Supervisor führt die fachliche Aufsicht über die Behandlung.</div>
+
+        <div class="section-title">VERLAUFSMESSUNG (Testdiagnostik)</div>
+        <div class="checklist-item"><input type="checkbox" id="t14"><label for="t14"><strong>KZT:</strong> Prä + Post</label></div>
+        <div class="checklist-item"><input type="checkbox" id="t15"><label for="t15"><strong>LZT:</strong> Prä + Verlauf (ca. alle 12 Stunden) + Post + Katamnese (6 Monate später)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="t16"><label for="t16">Ergebnisse in PsychoEQ eingeben + PDFs in Elefant unter „Diagnostik"</label></div>
+
+        <div class="section-title">FOLGEANTRAG rechtzeitig planen (wenn Kontingent zur Neige geht)</div>
+        <div class="checklist-item"><input type="checkbox" id="t17"><label for="t17">Mit Supervisor besprechen: Fortführung/Umwandlung nötig? Bericht erstellen + Supervisor vorlegen (auch bei KZT-Anträgen gefordert)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="t18"><label for="t18">Bearbeitungszeit einplanen: <strong>KZT 3 Wochen, LZT 5 Wochen</strong></label></div>
+        <div class="checklist-item"><input type="checkbox" id="t19"><label for="t19"><span class="highlight">In der Antragspause: KEINE Therapiestunden!</span> Nur Gesprächsziffer 23220 (keine Akutbehandlung)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="t20"><label for="t20">Versand wie immer: Scans in Elefant + E-Mail ans Institut — Institut versendet</label></div>
+
+        <div class="info-box"><strong>Kontingente laut Handbuch:</strong> KZT1: 12 (+3 bei KJP) | LZT: 60 (+15 bei KJP). Therapiepause max. 6 Monate, sonst neue Bewilligung nötig.</div>
+    </div>
+    <div class="footer"><span>Therapie & Ausbildung DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 14</span></div>
+</div>
+
+<!-- ============ SEITE 2: THERAPIEABSCHLUSS ============ -->
+<div class="page" id="page-15">
+    <div class="header">
+        <h1>🏁 THERAPIEABSCHLUSS-CHECKLISTE</h1>
+        <p>DGVT Dresden • Handbuch September 2024 • Bei jedem regulären Abschluss UND Abbruch durcharbeiten</p>
+    </div>
+    <div class="content">
+        <div class="phase-title">SCHRITT 1: ABSCHLUSS-DIAGNOSTIK</div>
+        <div class="checklist-item"><input type="checkbox" id="a1"><label for="a1"><strong>Post-Messung</strong> durchführen (gleiche Verfahren wie Prä-Messung)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="a2"><label for="a2">Ergebnisse in PsychoEQ eingeben + PDFs in Elefant „Diagnostik"</label></div>
+        <div class="checklist-item"><input type="checkbox" id="a3"><label for="a3"><strong>LZT: Katamnese-Messung nach 6 Monaten</strong> einplanen (Termin/Erinnerung setzen!)</label></div>
+
+        <div class="phase-title">SCHRITT 2: ABSCHLUSSBERICHT</div>
+        <div class="checklist-item"><input type="checkbox" id="a4"><label for="a4">Abschlussbericht schreiben</label></div>
+        <div class="checklist-item"><input type="checkbox" id="a5"><label for="a5">Mit Supervisor abstimmen + <span class="highlight">Supervisor unterschreibt</span> (wie bei Fallkonzeption und Bericht an Gutachter)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="a6"><label for="a6">In Elefant ablegen: Filter „Berichte → Zwischen-/Abschlussberichte (eigene)"</label></div>
+
+        <div class="phase-title">SCHRITT 3: ABRECHNUNGSTECHNISCHER ABSCHLUSS</div>
+        <div class="checklist-item"><input type="checkbox" id="a7"><label for="a7"><span class="highlight">Therapieabschluss mit Ziffer 88130/88131 kennzeichnen</span></label></div>
+        <div class="checklist-item"><input type="checkbox" id="a8"><label for="a8"><span class="highlight">E-Mail ans Institut</span> (mail@dgvt-dresden.de) über den Abschluss</label></div>
+        <div class="checklist-item"><input type="checkbox" id="a9"><label for="a9">Alle Leistungen des letzten Quartals vollständig in Elefant? (vor Quartalsende prüfen!)</label></div>
+
+        <div class="critical-box">Die Kennzeichnung 88130/88131 + Mail ans Institut gehört zu den Top-10-Pflichten des Handbuchs — nicht vergessen!</div>
+
+        <div class="phase-title">SCHRITT 4: AKTE VOLLSTÄNDIG MACHEN</div>
+        <div class="checklist-item"><input type="checkbox" id="a10"><label for="a10">Alle Sitzungsprotokolle vorhanden (jede Stunde dokumentiert)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="a11"><label for="a11">Alle Supervisionsprotokolle + Therapieverlaufsbögen unterschrieben in Elefant</label></div>
+        <div class="checklist-item"><input type="checkbox" id="a12"><label for="a12">Alle Testungen (Prä/Verlauf/Post) in PsychoEQ + Elefant</label></div>
+        <div class="checklist-item"><input type="checkbox" id="a13"><label for="a13">Alle unterschriebenen rechtlichen Dokumente + Bewilligungen in Elefant</label></div>
+        <div class="checklist-item"><input type="checkbox" id="a14"><label for="a14">Restliche Papierdokumente eingescannt + <strong>geschreddert</strong></label></div>
+
+        <div class="phase-title">SCHRITT 5: AUSBILDUNGS-VERWERTUNG</div>
+        <div class="checklist-item"><input type="checkbox" id="a15"><label for="a15">Stunden des Falls im 600h-Tracker nachgetragen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="a16"><label for="a16">Mind. 1 Video dieses Patienten wurde in Supervision gesichtet? (Pflicht pro Patient!)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="a17"><label for="a17">Eignet sich der Fall als <strong>Belegfall (4 nötig) oder Prüfungsfall (2 nötig)</strong>? Mit Supervisor besprechen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="a18"><label for="a18">Studienbuch aktuell?</label></div>
+
+        <div class="tip-box">Auch bei Therapieabbruch gilt derselbe Ablauf: dokumentieren, Bericht mit Supervisor, 88130/88131 + Mail ans Institut, Akte schließen.</div>
+    </div>
+    <div class="footer"><span>Therapie & Ausbildung DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 15</span></div>
+</div>
+
+<!-- ============ SEITE 3: AUSBILDUNGSFORTSCHRITT-TRACKER ============ -->
+<div class="page" id="page-16">
+    <div class="header">
+        <h1>📊 AUSBILDUNGSFORTSCHRITT-TRACKER</h1>
+        <p>DGVT Dresden • Handbuch September 2024 • Regelmäßig ausfüllen (z.B. quartalsweise)</p>
+    </div>
+    <div class="content">
+        <div class="info-box"><strong>Die Pflicht-Zahlen der Praktischen Ausbildung:</strong> 600 Behandlungsstunden (nur Probatorik + Therapie, PthS zählt NICHT) | 150h Supervision (50 Einzel + 100 Gruppe) | mind. 3 Supervisor*innen | mind. 40 Videosichtungen | mind. 1 Video pro Patient | 4 Belegfälle + 2 Prüfungsfälle</div>
+
+        <div class="section-title">600 BEHANDLUNGSSTUNDEN</div>
+        <table>
+            <tr><th style="width: 22%;">Stand am (Datum)</th><th style="width: 26%;">Stunden gesamt</th><th style="width: 26%;">davon Probatorik</th><th style="width: 26%;">davon Therapie</th></tr>
+            <tr style="height: 24px;"><td></td><td>______ / 600</td><td></td><td></td></tr>
+            <tr style="height: 24px;"><td></td><td>______ / 600</td><td></td><td></td></tr>
+            <tr style="height: 24px;"><td></td><td>______ / 600</td><td></td><td></td></tr>
+            <tr style="height: 24px;"><td></td><td>______ / 600</td><td></td><td></td></tr>
+        </table>
+
+        <div class="section-title">SUPERVISION (150h: 50 Einzel + 100 Gruppe, mind. 3 Supervisor*innen)</div>
+        <table>
+            <tr><th style="width: 34%;">Supervisor*in</th><th style="width: 22%;">Einzel (h)</th><th style="width: 22%;">Gruppe (h)</th><th style="width: 22%;">Studienbuch ✓</th></tr>
+            <tr style="height: 24px;"><td></td><td></td><td></td><td></td></tr>
+            <tr style="height: 24px;"><td></td><td></td><td></td><td></td></tr>
+            <tr style="height: 24px;"><td></td><td></td><td></td><td></td></tr>
+            <tr style="height: 24px;"><td></td><td></td><td></td><td></td></tr>
+            <tr><td><strong>SUMME</strong></td><td>______ / 50</td><td>______ / 100</td><td></td></tr>
+        </table>
+
+        <div class="info-box"><strong>Orientierung laut Handbuch:</strong> Einzelsupervision mind. 2 Patienten im Verlauf ODER mind. 20h bei einem Supervisor | Gruppenwechsel bei ca. 50h | Gruppengröße 4–5.</div>
+
+        <div class="section-title">VIDEOSICHTUNGEN (mind. 40 gesamt, mind. 1 pro Patient)</div>
+        <table>
+            <tr><th style="width: 22%;">Datum</th><th style="width: 26%;">Patient (Chiffre)</th><th style="width: 30%;">Supervisor*in</th><th style="width: 22%;">Lfd. Nr.</th></tr>
+            <tr style="height: 22px;"><td></td><td></td><td></td><td>______ / 40</td></tr>
+            <tr style="height: 22px;"><td></td><td></td><td></td><td>______ / 40</td></tr>
+            <tr style="height: 22px;"><td></td><td></td><td></td><td>______ / 40</td></tr>
+            <tr style="height: 22px;"><td></td><td></td><td></td><td>______ / 40</td></tr>
+        </table>
+        <div class="checklist-item"><input type="checkbox" id="f1"><label for="f1">Formblatt Videosupervision mit Supervisor-Unterschrift im Prüfungsordner abgelegt</label></div>
+
+        <div class="section-title">BELEGFÄLLE (4) & PRÜFUNGSFÄLLE (2)</div>
+        <table>
+            <tr><th style="width: 12%;">Nr.</th><th style="width: 24%;">Chiffre</th><th style="width: 32%;">Art (Beleg / Prüfung)</th><th style="width: 32%;">Status</th></tr>
+            <tr style="height: 22px;"><td>1</td><td></td><td></td><td></td></tr>
+            <tr style="height: 22px;"><td>2</td><td></td><td></td><td></td></tr>
+            <tr style="height: 22px;"><td>3</td><td></td><td></td><td></td></tr>
+            <tr style="height: 22px;"><td>4</td><td></td><td></td><td></td></tr>
+            <tr style="height: 22px;"><td>5</td><td></td><td></td><td></td></tr>
+            <tr style="height: 22px;"><td>6</td><td></td><td></td><td></td></tr>
+        </table>
+    </div>
+    <div class="footer"><span>Therapie & Ausbildung DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 16</span></div>
+</div>
+
+<!-- ============ SEITE 4: ABRECHNUNGS-SPICKZETTEL ============ -->
+<div class="page" id="page-17">
+    <div class="header">
+        <h1>💶 ABRECHNUNGS-SPICKZETTEL</h1>
+        <p>DGVT Dresden • Handbuch September 2024 • Die Geld-Regeln auf einer Seite</p>
+    </div>
+    <div class="content">
+        <div class="section-title">Ziffern aus dem Handbuch</div>
+        <table>
+            <tr><th style="width: 22%;">Ziffer</th><th style="width: 44%;">Wofür</th><th style="width: 34%;">Achtung</th></tr>
+            <tr><td><strong>35150</strong></td><td>Probatorische Sitzung</td><td><span class="highlight">Nur 1x pro Jahr pro Patient</span> — auch lehrpraxisübergreifend!</td></tr>
+            <tr><td><strong>23220</strong></td><td>Gesprächsziffer (z.B. Überbrückung Antragspause)</td><td>KEINE Akutbehandlung in der Ausbildung!</td></tr>
+            <tr><td><strong>88130/88131</strong></td><td>Kennzeichnung Therapieabschluss</td><td>Plus E-Mail ans Institut!</td></tr>
+        </table>
+
+        <div class="section-title">Die Vergütungs-Grundregeln</div>
+        <div class="checklist-item"><input type="checkbox" id="ab1"><label for="ab1"><strong>Rückvergütung: 42%</strong> der von der Krankenkasse vergüteten Leistungen</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ab2"><label for="ab2">Auszahlung: <strong>Ende des Folgequartals</strong></label></div>
+        <div class="checklist-item"><input type="checkbox" id="ab3"><label for="ab3"><strong>Neuer Abrechnungsschein pro Patient pro Quartal</strong></label></div>
+        <div class="checklist-item"><input type="checkbox" id="ab4"><label for="ab4">Auf die 600h zählen <strong>nur Probatorik + Therapiestunden</strong> (PthS NICHT)</label></div>
+
+        <div class="section-title">Ohne diese 4 Dinge gibt es KEIN Geld</div>
+        <table>
+            <tr><th style="width: 8%;">Nr.</th><th style="width: 46%;">Voraussetzung</th><th style="width: 46%;">Wann</th></tr>
+            <tr><td>1</td><td><strong>Chipkarte eingelesen</strong></td><td>Erstkontakt + jedes Quartal (Jan/Apr/Jul/Okt)</td></tr>
+            <tr><td>2</td><td><strong>Diagnose in Elefant</strong> (V bei Probatorik, G für Therapie)</td><td>Ab Erstkontakt</td></tr>
+            <tr><td>3</td><td><strong>Bewilligungsdatum + Stundenkontingent in Elefant</strong></td><td>Sofort nach Bewilligung</td></tr>
+            <tr><td>4</td><td><strong>Leistung mit Ziffer im Leistungen-Reiter</strong></td><td>Tagaktuell, spätestens vor Quartalsende</td></tr>
+        </table>
+
+        <div class="critical-box">Nach Quartalsende sind keine Eintragungen mehr möglich — vergessene Leistungen sind unwiderruflich verloren (0 € + 0 h)!</div>
+
+        <div class="section-title">Abrechnungs-Stolperfallen aus dem Handbuch</div>
+        <div class="checklist-item"><input type="checkbox" id="ab5"><label for="ab5">Patient hatte im letzten Jahr schon Probatorik (auch bei anderer PiA/Lehrpraxis)? → 35150 NICHT abrechenbar</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ab6"><label for="ab6">Nur GKV-Patienten — privat/Beihilfe nicht abrechenbar</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ab7"><label for="ab7">Antragspause: keine Therapiestunden abrechenbar (nur ggf. 23220)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ab8"><label for="ab8">Therapie vor Bewilligung begonnen? → Stunden nicht vergütet</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ab9"><label for="ab9">Krankenkassenwechsel: sofort melden, neuer Schein, Pause bis neue Bewilligung</label></div>
+        <div class="checklist-item"><input type="checkbox" id="ab10"><label for="ab10"><strong>Ausfallhonorar</strong> bei wiederholtem Nichterscheinen: Privatleistung, Höhe vom Institut festgelegt, Aufklärung muss unterschrieben sein</label></div>
+
+        <div class="tip-box">Faustregel: Jede Stunde ist erst dann „fertig", wenn Protokoll + Leistungsziffer in Elefant stehen. Wer das tagaktuell macht, verliert nie Geld am Quartalsende.</div>
+    </div>
+    <div class="footer"><span>Therapie & Ausbildung DGVT Dresden • Handbuch Stand September 2024</span><span>Seite 17</span></div>
+</div>
+
+<script>
+// ===== Service Worker (Offline-Fähigkeit) =====
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+
+// ===== Häkchen dauerhaft speichern =====
+const STORAGE_KEY = 'probatorik-checks';
+
+function loadChecks() {
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch (e) {}
+  document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach((box, i) => {
+    const key = box.id || 'cb' + i;
+    if (saved[key]) box.checked = true;
+    box.addEventListener('change', () => {
+      saved[key] = box.checked;
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); } catch (e) {}
+      updateProgress();
+    });
+  });
+  updateProgress();
+}
+
+// ===== Fortschrittsanzeige =====
+function updateProgress() {
+  const boxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+  const done = [...boxes].filter(b => b.checked).length;
+  const bar = document.getElementById('progress-bar');
+  const label = document.getElementById('progress-label');
+  if (bar && label) {
+    const pct = boxes.length ? Math.round(done / boxes.length * 100) : 0;
+    bar.style.width = pct + '%';
+    label.textContent = done + ' / ' + boxes.length + ' (' + pct + '%)';
+  }
+}
+
+function resetChecks() {
+  if (!confirm('Alle Häkchen wirklich zurücksetzen?')) return;
+  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(b => b.checked = false);
+  updateProgress();
+}
+
+// ===== Fortschrittsleiste oben einfügen (nur Bildschirm, nicht Druck) =====
+document.addEventListener('DOMContentLoaded', () => {
+  const barWrap = document.createElement('div');
+  barWrap.id = 'progress-wrap';
+  barWrap.innerHTML =
+    '<div style="flex:1; background:#d0d0d0; border-radius:6px; height:12px; overflow:hidden;">' +
+    '<div id="progress-bar" style="height:100%; width:0%; background:#1a73b8; transition:width .2s;"></div></div>' +
+    '<span id="progress-label" style="font-size:12px; color:#333; min-width:90px; text-align:right;"></span>' +
+    '<button onclick="resetChecks()" style="font-size:11px; padding:4px 10px; border:1px solid #1a73b8; background:white; color:#1a73b8; border-radius:4px; cursor:pointer;">Reset</button>';
+  barWrap.style.cssText = 'position:sticky; top:0; z-index:10; display:flex; gap:10px; align-items:center; width:210mm; max-width:100%; margin:0 auto 10px auto; background:white; padding:8px 14px; box-shadow:0 1px 4px rgba(0,0,0,0.15); border-radius:6px;';
+  document.body.prepend(barWrap);
+
+  const style = document.createElement('style');
+  style.textContent = '@media print { #progress-wrap { display: none !important; } }';
+  document.head.appendChild(style);
+
+  loadChecks();
+});
+</script>
+
+<style>
+/* ===== Navigation ===== */
+#nav-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 90; display: none; }
+#nav-drawer {
+    position: fixed; top: 0; left: -290px; width: 280px; height: 100%;
+    background: white; z-index: 100; box-shadow: 2px 0 12px rgba(0,0,0,0.25);
+    transition: left .25s ease; overflow-y: auto; padding: 14px;
+}
+#nav-drawer.open { left: 0; }
+#nav-drawer h2 { font-size: 15px; color: #1a73b8; margin: 0 0 10px 0; }
+#nav-drawer .nav-group { font-size: 11px; font-weight: bold; color: white; background: #1a73b8; padding: 5px 9px; border-radius: 4px; margin: 12px 0 6px 0; }
+#nav-drawer a { display: block; font-size: 12.5px; color: #333; text-decoration: none; padding: 7px 9px; border-radius: 4px; border-left: 3px solid transparent; }
+#nav-drawer a:active, #nav-drawer a:hover { background: #e8f0f7; border-left-color: #1a73b8; }
+#nav-drawer .pgnr { color: #999; font-size: 10px; }
+#menu-btn { font-size: 12px; padding: 4px 10px; border: 1px solid #1a73b8; background: #1a73b8; color: white; border-radius: 4px; cursor: pointer; white-space: nowrap; }
+#quick-chips { display: flex; gap: 6px; flex-wrap: wrap; width: 210mm; max-width: 100%; margin: 0 auto 10px auto; padding: 0 4px; }
+#quick-chips a { font-size: 11.5px; padding: 6px 11px; border-radius: 14px; text-decoration: none; font-weight: bold; }
+.chip-red { background: #fff3cd; color: #8b0000; border: 1px solid #ff6b6b; }
+.chip-blue { background: #e3f2fd; color: #0d47a1; border: 1px solid #1a73b8; }
+#to-top { position: fixed; right: 14px; bottom: 14px; z-index: 80; width: 42px; height: 42px; border-radius: 50%; border: none; background: #1a73b8; color: white; font-size: 19px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: none; }
+@media print { #nav-drawer, #nav-overlay, #quick-chips, #to-top { display: none !important; } }
+html { scroll-behavior: smooth; }
+</style>
+
+<div id="nav-overlay" onclick="toggleNav(false)"></div>
+<nav id="nav-drawer">
+    <h2>📑 Inhalt</h2>
+    <div class="nav-group">PROBATORIK</div>
+    <a href="#page-1" onclick="toggleNav(false)">Vor Erstkontakt & Chipkarte <span class="pgnr">S.1</span></a>
+    <a href="#page-2" onclick="toggleNav(false)">Aufklärung & Formulare <span class="pgnr">S.2</span></a>
+    <a href="#page-3" onclick="toggleNav(false)">Diagnostik & Dokumentation <span class="pgnr">S.3</span></a>
+    <a href="#page-4" onclick="toggleNav(false)">Sitzungen 2–6 & Konsiliarbericht <span class="pgnr">S.4</span></a>
+    <a href="#page-5" onclick="toggleNav(false)">Fallkonzeption & Diagnose <span class="pgnr">S.5</span></a>
+    <a href="#page-6" onclick="toggleNav(false)">Antrag & Bewilligung <span class="pgnr">S.6</span></a>
+    <a href="#page-7" onclick="toggleNav(false)">Abschluss Probatorik & Supervision <span class="pgnr">S.7</span></a>
+    <a href="#page-8" onclick="toggleNav(false)">Häufige Fehler & FAQ <span class="pgnr">S.8</span></a>
+    <a href="#page-9" onclick="toggleNav(false)">Kontakte & Notizen <span class="pgnr">S.9</span></a>
+    <div class="nav-group">PRAXISSTART</div>
+    <a href="#page-10" onclick="toggleNav(false)">Onboarding: Zugänge & Technik <span class="pgnr">S.10</span></a>
+    <a href="#page-11" onclick="toggleNav(false)">Onboarding: Organisation <span class="pgnr">S.11</span></a>
+    <a href="#page-12" onclick="toggleNav(false)">Quartals-Routine <span class="pgnr">S.12</span></a>
+    <a href="#page-13" onclick="toggleNav(false)">Notfall-Blatt <span class="pgnr">S.13</span></a>
+    <div class="nav-group">THERAPIE & AUSBILDUNG</div>
+    <a href="#page-14" onclick="toggleNav(false)">Laufende Therapie <span class="pgnr">S.14</span></a>
+    <a href="#page-15" onclick="toggleNav(false)">Therapieabschluss <span class="pgnr">S.15</span></a>
+    <a href="#page-16" onclick="toggleNav(false)">Fortschritt-Tracker <span class="pgnr">S.16</span></a>
+    <a href="#page-17" onclick="toggleNav(false)">Abrechnungs-Spickzettel <span class="pgnr">S.17</span></a>
+</nav>
+<button id="to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Nach oben">↑</button>
+
+<script>
+function toggleNav(open) {
+    const d = document.getElementById('nav-drawer');
+    const o = document.getElementById('nav-overlay');
+    const show = (open === undefined) ? !d.classList.contains('open') : open;
+    d.classList.toggle('open', show);
+    o.style.display = show ? 'block' : 'none';
+}
+document.addEventListener('DOMContentLoaded', () => {
+    // Menü-Button in die Fortschrittsleiste einfügen
+    const wrap = document.getElementById('progress-wrap');
+    if (wrap) {
+        const btn = document.createElement('button');
+        btn.id = 'menu-btn';
+        btn.textContent = '☰ Inhalt';
+        btn.onclick = () => toggleNav();
+        wrap.prepend(btn);
+    }
+    // Schnellzugriff-Chips unter der Leiste
+    const chips = document.createElement('div');
+    chips.id = 'quick-chips';
+    chips.innerHTML =
+        '<a class="chip-red" href="#page-13">⚠️ Notfall</a>' +
+        '<a class="chip-blue" href="#page-12">📅 Quartal</a>' +
+        '<a class="chip-blue" href="#page-14">🔄 Sitzung heute</a>' +
+        '<a class="chip-blue" href="#page-8">❓ FAQ</a>' +
+        '<a class="chip-blue" href="#page-9">📞 Kontakte</a>';
+    if (wrap && wrap.parentNode) wrap.parentNode.insertBefore(chips, wrap.nextSibling);
+    // Nach-oben-Button ab 600px Scroll
+    window.addEventListener('scroll', () => {
+        document.getElementById('to-top').style.display = window.scrollY > 600 ? 'block' : 'none';
+    });
+});
+</script>
+</body>
+</html>
